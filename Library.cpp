@@ -30,6 +30,7 @@ class Library
 		void addBookToLibrary(Book&);
 		vector<Book> searchBookByName(string);
 		vector<Book> searchBookByAuthor(string);
+		void printAllBooks();
 
 };
 
@@ -79,6 +80,18 @@ vector<Book> Library :: searchBookByAuthor(string authorname)
 	return p;
 }
 
+void Library:: printAllBooks()
+{
+	cout << "=======================================================================================\n";
+	cout<<"All books present in the Library"<<"\n";
+	cout << "=======================================================================================\n";
+	for(Book book: books)
+	{
+		cout<<"Book Name : "<<book.getName()<<" "<<"Author Name : "<<book.getAuthor()<<"\n";
+	}
+	cout << "=======================================================================================\n";
+}
+
 
 int main()
 {
@@ -101,14 +114,53 @@ int main()
 	library.addBookToLibrary(book6);
 	library.addBookToLibrary(book7);
 
-	vector<Book> list =  library.searchBookByAuthor("J K Rowling");
-	for(Book book: list)
-		cout << book.getName()<< endl;
-	cout << "**************************************************************************************\n";
 
-	list = library.searchBookByName("The");
-	for(Book book: list)
-		cout << book.getName()<< endl;
+	cout<<"Options Present in the Library"<<"\n";
+	cout<<"1.Get List of Books present in the Library.\n";
+	cout<<"2.Search the Book by book name\n";
+	cout<<"3.Search the book by author name\n";
+
+	int a;
+	cin>>a;
+	if(a==1)
+	{
+		library.printAllBooks();
+	}
+	else if(a==3)
+	{
+		string b;
+		cout<<"Enter the Author name you want to search:\n";
+		cin.ignore(256, '\n');
+		getline(cin,b);
+	
+		vector<Book> list =  library.searchBookByAuthor(b);
+		cout << "=======================================================================================\n";
+		for(Book book: list)
+			cout << book.getName()<< endl;
+		cout << "=======================================================================================\n";
+	}
+	else if(a==2)
+	{
+		string b;
+		cout<<"Enter the Book name you want to search:\n";
+		cin.ignore(256, '\n');
+		getline(cin,b);
+		
+		vector<Book> list = library.searchBookByName(b);
+		cout << "=======================================================================================\n";
+		for(Book book: list)
+			cout << book.getName()<< endl;
+		cout << "=======================================================================================\n";
+	}
+	else
+	{
+		cout<<"Invalid Search";
+	}
+	
+	
+	
+
+	
 
 }
 
